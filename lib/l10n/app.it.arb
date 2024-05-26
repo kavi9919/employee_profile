@@ -1,0 +1,25 @@
+{
+    "@@locale": "it",
+    "title": "Il mio profilo",
+    "viewProfile": "Visualizza Profilo",
+    "profile": "Profilo",
+    "personalInformation": "INFORMAZIONI PERSONALI",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "dateOfBirth": "Data di nascita",
+    "gender": "Genere",
+    "female": "Femmina",
+    "contractDetails": "DETTAGLI DEL CONTRATTO",
+    "dateHired": "Data di assunzione",
+    "expirationDate": "Data di scadenza",
+    "positionDetails": "DETTAGLI DELLA POSIZIONE",
+    "position": "Posizione",
+    "startDate": "Data di inizio",
+    "managersName": "Nome del manager",
+    "contactNumber": "Numero di contatto",
+    "done": "Fatto",
+    "english": "Inglese",
+    "german": "Tedesco",
+    "italian": "Italiano"
+  }
+  

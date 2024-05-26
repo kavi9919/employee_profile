@@ -1,7 +1,10 @@
+import 'package:employee_profile/lang.dart';
+import 'package:employee_profile/main.dart';
 import 'package:employee_profile/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -16,59 +19,39 @@ class _MyProfileState extends State<MyProfile> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('My Profile', style: CustomTextStyle.heading(context)),
-        actions: [
-          PopupMenuButton<String>(
-            icon: Icon(Icons.language),
-            onSelected: (String value) {
-              print(value);
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  value: 'en',
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/us.svg',
-                        width: 24,
-                        height: 24,
+        title: Text(AppLocalizations.of(context)!.title,
+            style: CustomTextStyle.heading(context)),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton<Language>(
+              underline: const SizedBox(),
+              icon: const Icon(
+                Icons.language,
+              ),
+              onChanged: (Language? language) {
+                if (language != null) {
+                  MyApp.setLocale(context, Locale(language.languageCode, ''));
+                }
+              },
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>(
+                    (e) => DropdownMenuItem<Language>(
+                      value: e,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            e.flag,
+                            style: const TextStyle(fontSize: 30),
+                          ),
+                          Text(e.name)
+                        ],
                       ),
-                      SizedBox(width: 8),
-                      Text('English'),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'de',
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/de.svg',
-                        width: 24,
-                        height: 24,
-                      ),
-                      SizedBox(width: 8),
-                      Text('German'),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'it',
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/it.svg',
-                        width: 24,
-                        height: 24,
-                      ),
-                      SizedBox(width: 8),
-                      Text('Italian'),
-                    ],
-                  ),
-                ),
-              ];
-            },
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ],
       ),
@@ -92,12 +75,12 @@ class _MyProfileState extends State<MyProfile> {
                 onPressed: () {
                   _showEventPreference(context);
                 },
-                child: Text('View Profile',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  padding: EdgeInsets.fromLTRB(40, 15, 40, 15),
-                ))
+                  padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
+                ),
+                child: Text(AppLocalizations.of(context)!.viewProfile,
+                    style: const TextStyle(fontSize: 16, color: Colors.white)))
           ],
         ),
       ),
@@ -139,7 +122,7 @@ class CustomTitleBuild extends StatelessWidget {
 void _showEventPreference(BuildContext context) {
   final ThemeData theme = Theme.of(context);
   showModalBottomSheet(
-    backgroundColor: Color(0xffF8F8F8),
+    backgroundColor: const Color(0xffF8F8F8),
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
@@ -166,7 +149,8 @@ void _showEventPreference(BuildContext context) {
                         height: 5,
                       ),
                       const SizedBox(height: 10),
-                      Text('Profile', style: CustomTextStyle.heading(context)),
+                      Text(AppLocalizations.of(context)!.profile,
+                          style: CustomTextStyle.heading(context)),
                     ],
                   ),
                   actions: [
@@ -176,11 +160,11 @@ void _showEventPreference(BuildContext context) {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: const Center(
+                        child: Center(
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(0, 8, 8, 0),
                             child: Text(
-                              "Done",
+                              AppLocalizations.of(context)!.done,
                               style:
                                   TextStyle(fontSize: 16, color: Colors.grey),
                             ),
@@ -199,7 +183,7 @@ void _showEventPreference(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
                         child: Text(
-                          "PERSONAL INFORMATION",
+                          AppLocalizations.of(context)!.personalInformation,
                           style: theme.textTheme.bodySmall,
                         ),
                       ),
@@ -212,7 +196,8 @@ void _showEventPreference(BuildContext context) {
                             child: Column(
                               children: [
                                 CustomTitleBuild(
-                                  title: "First Name",
+                                  title:
+                                      AppLocalizations.of(context)!.firstName,
                                   subTitle: "Emma",
                                 ),
                                 const Divider(
@@ -220,7 +205,7 @@ void _showEventPreference(BuildContext context) {
                                   endIndent: 15.0,
                                 ),
                                 CustomTitleBuild(
-                                  title: "Last Name",
+                                  title: AppLocalizations.of(context)!.lastName,
                                   subTitle: "Corrine",
                                 ),
                                 const Divider(
@@ -228,7 +213,8 @@ void _showEventPreference(BuildContext context) {
                                   endIndent: 15.0,
                                 ),
                                 CustomTitleBuild(
-                                  title: "Date of Birth",
+                                  title:
+                                      AppLocalizations.of(context)!.dateOfBirth,
                                   subTitle: "09/24/1999",
                                 ),
                                 const Divider(
@@ -236,8 +222,9 @@ void _showEventPreference(BuildContext context) {
                                   endIndent: 15.0,
                                 ),
                                 CustomTitleBuild(
-                                  title: "Gender",
-                                  subTitle: "Female",
+                                  title: AppLocalizations.of(context)!.gender,
+                                  subTitle:
+                                      AppLocalizations.of(context)!.female,
                                 ),
                               ],
                             ),
@@ -247,7 +234,7 @@ void _showEventPreference(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
                         child: Text(
-                          "CONTRACT DETAILS",
+                          AppLocalizations.of(context)!.contractDetails,
                           style: theme.textTheme.bodySmall,
                         ),
                       ),
@@ -258,7 +245,7 @@ void _showEventPreference(BuildContext context) {
                           child: Column(
                             children: [
                               CustomTitleBuild(
-                                title: "Date hired",
+                                title: AppLocalizations.of(context)!.dateHired,
                                 subTitle: "25/05/2024",
                               ),
                               const Divider(
@@ -266,7 +253,8 @@ void _showEventPreference(BuildContext context) {
                                 endIndent: 15.0,
                               ),
                               CustomTitleBuild(
-                                title: "Expiration Date",
+                                title: AppLocalizations.of(context)!
+                                    .expirationDate,
                                 subTitle: "25/05/2027",
                               ),
                             ],
@@ -277,7 +265,7 @@ void _showEventPreference(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
                         child: Text(
-                          "POSITION DETAILS",
+                          AppLocalizations.of(context)!.personalInformation,
                           style: theme.textTheme.bodySmall,
                         ),
                       ),
@@ -288,7 +276,7 @@ void _showEventPreference(BuildContext context) {
                           child: Column(
                             children: [
                               CustomTitleBuild(
-                                title: "Position",
+                                title: AppLocalizations.of(context)!.position,
                                 subTitle: "Software Engineer",
                               ),
                               const Divider(
@@ -296,7 +284,7 @@ void _showEventPreference(BuildContext context) {
                                 endIndent: 15.0,
                               ),
                               CustomTitleBuild(
-                                title: "Start Date",
+                                title: AppLocalizations.of(context)!.startDate,
                                 subTitle: "25/05/2025",
                               ),
                               const Divider(
@@ -304,7 +292,8 @@ void _showEventPreference(BuildContext context) {
                                 endIndent: 15.0,
                               ),
                               CustomTitleBuild(
-                                title: "Manager's Name",
+                                title:
+                                    AppLocalizations.of(context)!.managersName,
                                 subTitle: "John Doe",
                               ),
                               const Divider(
@@ -312,7 +301,8 @@ void _showEventPreference(BuildContext context) {
                                 endIndent: 15.0,
                               ),
                               CustomTitleBuild(
-                                title: "Contact Number",
+                                title:
+                                    AppLocalizations.of(context)!.contactNumber,
                                 subTitle: "+44 20 7123 4567",
                               ),
                             ],
