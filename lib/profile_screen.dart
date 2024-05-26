@@ -1,5 +1,6 @@
 import 'package:employee_profile/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MyProfile extends StatefulWidget {
@@ -16,6 +17,60 @@ class _MyProfileState extends State<MyProfile> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('My Profile', style: CustomTextStyle.heading(context)),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.language),
+            onSelected: (String value) {
+              print(value);
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: 'en',
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/us.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      SizedBox(width: 8),
+                      Text('English'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'de',
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/de.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      SizedBox(width: 8),
+                      Text('German'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'it',
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/it.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Italian'),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
