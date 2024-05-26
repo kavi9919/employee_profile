@@ -1,0 +1,25 @@
+{
+    "@@locale": "en",
+    "title": "My Profile",
+    "viewProfile": "View Profile",
+    "profile": "Profile",
+    "personalInformation": "PERSONAL INFORMATION",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "female": "Female",
+    "contractDetails": "CONTRACT DETAILS",
+    "dateHired": "Date hired",
+    "expirationDate": "Expiration Date",
+    "positionDetails": "POSITION DETAILS",
+    "position": "Position",
+    "startDate": "Start Date",
+    "managersName": "Manager's Name",
+    "contactNumber": "Contact Number",
+    "done": "Done",
+    "english": "English",
+    "german": "Deutsch",
+    "italian": "Italiano"
+  }
+  
